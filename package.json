@@ -2,9 +2,10 @@
   "name": "toeicpracticesoftware",
   "version": "1.0.0",
   "description": "Idol Quân, idol Hiếu, Tuân, Tiến ;\r Ngôn ngữ: HTML CSS JavaScript NodeJS v..v ; \r Chủ đề: Xây dựng ứng dụng web thi thử TOEIC ;",
-  "main": "index.js",
+  "main": "./src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --inspect ./src/index.js"
   },
   "repository": {
     "type": "git",
@@ -22,10 +23,12 @@
   },
   "homepage": "https://github.com/nguyenlenam-18112000/TOEICPracticeSoftware#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "express-handlebars": "^5.1.0"
   },
   "devDependencies": {
     "morgan": "^1.10.0",
+    "node-sass": "^4.14.1",
     "nodemon": "^2.0.4"
   }
 }
