@@ -5,13 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="css/app.css">
+
 </head>
 <body>
     <header>
         {{>header}}
     </header>
     <div class="container">
-        {{{body}}}
+        {{{body}}}     
     </div>
+    
 </body>
+<script>
+    var choice = document.getElementsByClassName("inp_data")
+    
+    var h1 = document.querySelector("h1")
+    for (i = 0; i < choice.length; i++){
+        choice[i].onclick = function(e){
+            h1.style.color = e.toElement.id
+        }
+    }
+</script>
 </html>

@@ -3,3 +3,8 @@ h1 {
 
 div {
   color: blue; }
+
+.header {
+  width: 100vw;
+  height: 160px;
+  background-color: rgba(155, 176, 245, 0.4); }

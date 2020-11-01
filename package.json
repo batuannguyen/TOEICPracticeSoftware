@@ -25,7 +25,11 @@
   "homepage": "https://github.com/nguyenlenam-18112000/TOEICPracticeSoftware#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "express-handlebars": "^5.1.0"
+    "express-handlebars": "^5.1.0",
+    "got": "^10.4.0",
+    "jsdom": "^16.2.2",
+    "node-sass": "^4.14.1",
+    "pg": "^8.4.1"
   },
   "devDependencies": {
     "morgan": "^1.10.0",
