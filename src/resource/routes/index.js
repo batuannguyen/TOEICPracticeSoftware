@@ -1,8 +1,8 @@
 const homeRoute = require('./home')
-const newsRoute = require('./news')
+const loginRoute = require('./login')
 function route(app){
-    app.get("/", homeRoute)
-    app.get("/news", newsRoute)
+    app.use("/login", loginRoute)
+    app.use("/", homeRoute)
 }
 
 module.exports = route

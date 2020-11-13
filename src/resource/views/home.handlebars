@@ -1,9 +1,17 @@
 <h1> MAIN LAYOUT </h1>
 <div>
-    <a href="http://localhost:4000/news">Link</a>
+    <a href="http://localhost:4000/login">Link</a>
 </div>
-<label for="red">RED</label>
-<input type="radio" class="inp_data" name="color_menu" id="red"></br>
-<label for="green">GREEN</label>
-<input type="radio" class="inp_data" name="color_menu" id="green">
-<script src="../app/controllers/HomeController.js"></script>
+<div>
+    <ul>
+        {{#each player_data}}
+        <li><span style="color: red">{{this.name}}:</span>{{this.position}}</li>
+        {{/each}}
+    </ul>
+    <ul>
+        {{#each user_data}}
+        <li>{{this.username}}:{{this.password}}</li>
+        {{/each}}
+    </ul>
+    <p>Status: {{status}}</p>
+</div>
