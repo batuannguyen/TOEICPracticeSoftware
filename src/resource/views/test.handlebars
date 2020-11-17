@@ -1,0 +1,46 @@
+<form action="http://localhost:4000/test/part-{{numPart}}-test-{{numTest}}" method="post" id="answer">
+    <div class="col-md-8 col-sm-8 block-container">
+    <h2>
+        Part {{numPart}} - Test {{numTest}}
+    </h2>
+    {{#each data}}
+    <div class="question-container">
+        <div>
+            <div>
+                <img src="http://localhost:4000/img/{{this.image}}" alt="Bayern" class="image_part1">
+            </div>
+            <div>
+                <p>
+                    {{this.paragraph}}
+                </p>
+            </div>
+            <div>
+                <audio controls>
+                    <source src="http://localhost:4000/audio/{{this.audio}}" type="audio/mpeg">
+                </audio>
+            </div>
+            {{#each this.question_list}}
+            <h4>
+                Question {{this.number_question}}. {{this.question_content}}
+            </h4>
+            <div class="choice-container">
+                <ul class="choice_list">
+                    {{#each this.answer}}
+                    <li class="choice-item">
+                        <input type="radio" name="{{this.number_question}}" id="{{this.number_question}}-{{this.L}}" value="{{this.L}}">
+                        <label for="{{this.number_question}}-{{this.L}}">({{this.L}}){{this.content}}</label>
+                    </li>
+                    {{/each}}
+                </ul>
+            </div>
+            {{/each}}
+            
+        </div>
+    </div>
+    {{/each}}
+    </div>
+    <div class="col-sm-8 col-md-8">
+        <button type="submit" form="answer">Submit</button>
+    </div>
+    <div class="col-sm-4 col-md-4"></div>
+</form>

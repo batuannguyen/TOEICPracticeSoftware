@@ -1,5 +1,4 @@
-const client = require("../models/client")
-const query = require("../models/home")
+const query = require("../models/index")
 class HomeController{
     index(req, res){
         async function readData(){
@@ -9,7 +8,6 @@ class HomeController{
             var player_data = await query(text2)
             var data = {"user_data": user_data, "player_data": player_data}
             res.render("home", data)
-            console.log(data)
             return data
         }
         try{
@@ -43,5 +41,4 @@ class HomeController{
         console.log(info)
     }
 }
-
 module.exports = new HomeController()
