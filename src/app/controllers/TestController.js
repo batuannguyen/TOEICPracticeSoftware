@@ -1,4 +1,19 @@
 const queryData = require("../models/index")
+const fs = require("fs")
+const path = require("path")
+
+async function read(path){
+    var promise = new Promise((resolve,reject) =>{
+        fs.readFile(path, function(err, data){
+            if (err) reject("error")
+            else resolve(data.toString())
+        })
+    })
+    promise.then((resp) => resp)
+            .catch((err) => console.warn(err))
+    return promise
+}
+
 class TestController{
 
     index(req, res){
@@ -34,17 +49,24 @@ class TestController{
                         num_page ++
                         question_data.push({"image": question.image, "audio": question.audio, "question_list": []})
                     }
+                    question_data[num_page - 1].question_list.push(q)
                 }
-                else{
+                else if (numPart >= 6){
                     if (question.paragraph != null){
                         num_page ++
-                        question_data.push({"image": question.image, "paragraph": question.paragraph, "question_list": []})
+                        var path_file = path.join(__dirname,"..", "..", "public", "paragraph", question.paragraph)
+                        var paragraph = await read(path_file)
+                        var line = paragraph.split("\n")
+                        question_data.push({"image":question.image,"paragraph": line.join("<br>"), "question_list": []})
                     }
+                    question_data[num_page - 1].question_list.push(q)
                 }
-                question_data[num_page - 1].question_list.push(q)
+                else{
+                    num_page ++
+                    question_data.push({"question_list":[q]})
+                }
             }
             res.render("test", {"data": question_data, "numPart": numPart, "numTest": numTest})
-            console.log(question_data)
         }
         try{
             process()
@@ -55,7 +77,7 @@ class TestController{
     }
 
     postForm(req, res){
-        async function readData(){
+        async function process(){
             var slug_info = req.params.slug
             var info = slug_info.split("-")
             var numPart = parseInt(info[1], 10)
@@ -64,51 +86,54 @@ class TestController{
             var values = [numPart, numTest]
             var question_list = await queryData(text, values)
             var question_data = []
-            if (numPart <= 4){
-                var num_page = 0
-                for (var question of question_list){
-                    var q = {}
-                    var keys = ["number_question", "question_content", "correct"]
-                    for (var key of keys){
-                        q[key] = question[key]
-                    }
-                    q["answer"] = []
-                    q["answer"].push({"content":question.a_choice, "number_question": question.number_question, "L":"A"})
-                    q["answer"].push({"content":question.b_choice, "number_question": question.number_question, "L":"B"})
-                    q["answer"].push({"content":question.c_choice, "number_question": question.number_question, "L":"C"})
-                    q["choice"] = req.body[question.number_question.toString()]
-                    if (numPart != 2) {
-                        q["answer"].push({"content":question.d_choice, "number_question": question.number_question, "L":"D"})
-                    }
+            var num_page = 0
+            for (var question of question_list){
+                var q = {}
+                q["number_question"] = question["number_question"]
+                q["question_content"] = question["question_content"]
+                q["correct"] = question["correct"]
+                q["answer"] = []
+                q["answer"].push({"content":question.a_choice, "number_question": question.number_question, "L":"A"})
+                q["answer"].push({"content":question.b_choice, "number_question": question.number_question, "L":"B"})
+                q["answer"].push({"content":question.c_choice, "number_question": question.number_question, "L":"C"})
+                q["choice"] = req.body[question.number_question.toString()]
+                if (numPart != 2) {
+                    q["answer"].push({"content":question.d_choice, "number_question": question.number_question, "L":"D"})
+                }
+
+                if (numPart <= 4){
                     if (question.audio != null){
-                        num_page ++ 
-                        question_data.push({"image": question.image, "audio": question.audio, "paragraph": question.paragraph, "question_list": []})
+                        num_page ++
+                        question_data.push({"image": question.image, "audio": question.audio, "question_list": []})
+                        if (question.paragraph != null){
+                            var path_file = path.join(__dirname,"..", "..", "public", "paragraph", question.paragraph)
+                            var paragraph = await read(path_file)
+                            var line = paragraph.split("\n")
+                            question_data[num_page - 1]["paragraph"] = line.join("<br>")
+                        }
                     }
                     question_data[num_page - 1].question_list.push(q)
                 }
-            }
-            else{
-                var num_page = 0
-                for (var question of question_list){
-                    var q = {}
-                    var except = ["question_id", "image", "paragraph", "audio", "test_id", "correct"]
-                    for (var key in question){
-                        if (except.indexOf(key) < 0){
-                            q[key] = question[key]
-                        }
-                    }
+                else if (numPart >= 6){
                     if (question.paragraph != null){
-                        num_page ++ 
-                        question_data.push({"image": question.image, "audio": question.audio, "paragraph": question.paragraph, "question_list": []})
+                        num_page ++
+                        var path_file = path.join(__dirname,"..", "..", "public", "paragraph", question.paragraph)
+                        var paragraph = await read(path_file)
+                        var line = paragraph.split("\n")
+                        question_data.push({"image": question.image, "paragraph": line.join("<br>"), "question_list": []})
                     }
                     question_data[num_page - 1].question_list.push(q)
+                }
+                else{
+                    num_page ++
+                    question_data.push({"question_list":[q]})
                 }
             }
             res.render("key", {"data": question_data, "numPart": numPart, "numTest": numTest})
             console.log(question_data)
         }
         try{
-            readData()
+            process()
         }
         catch(err){
             res.send("Server error")

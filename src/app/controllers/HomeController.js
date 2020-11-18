@@ -1,22 +1,7 @@
 const query = require("../models/index")
 class HomeController{
     index(req, res){
-        async function readData(){
-            var text1 = "SELECT * FROM user_list"
-            var user_data = await query(text1)
-            var text2 = "SELECT * FROM players"
-            var player_data = await query(text2)
-            var data = {"user_data": user_data, "player_data": player_data}
-            res.render("home", data)
-            return data
-        }
-        try{
-            var data = readData()
-            console.log(data)
-        }
-        catch(err){
-            console.log(err)
-        }
+        res.render("home")
     }
     postData(req, res){
         var info = req.body
@@ -24,7 +9,6 @@ class HomeController{
         var values = [info.username, info.password]
         async function checkData(){
             var data = await query(text, values)
-            console.log(data)
             if (data == 0){
                 res.render("home", {"status": "login failed"})
             }
@@ -38,7 +22,6 @@ class HomeController{
         catch(err){
             console.log(err)
         }
-        console.log(info)
     }
 }
 module.exports = new HomeController()

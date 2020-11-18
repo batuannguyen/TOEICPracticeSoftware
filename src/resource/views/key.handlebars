@@ -8,7 +8,7 @@
             <div>
                 <img src="http://localhost:4000/img/{{this.image}}" alt="Bayern" class="image_part1">
             </div>
-            <div>
+            <div class="paragraph-container">
                 <p>
                     {{this.paragraph}}
                 </p>
@@ -56,5 +56,10 @@
                 item.style.backgroundColor = "green"
             }
         }
+    }
+    for (var element of document.querySelectorAll("p")){
+        console.log(element)
+        var text = element.innerText
+        element.innerHTML = text
     }
 </script>
