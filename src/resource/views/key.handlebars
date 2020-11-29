@@ -1,40 +1,58 @@
-<div class="col-md-8 col-sm-8 block-container">
-    <h2>
-        Part {{numPart}} - Test {{numTest}} - Key
-    </h2>
-    {{#each data}}
-    <div class="question-container">
-        <div>
+<div class="row">
+    <div class="col-md-8 col-sm-8 block-container">
+        <h2>
+            Part {{numPart}} - Test {{numTest}} - Key
+        </h2>
+        {{#each data}}
+        <div class="question-container" id="data-page-{{this.num_page}}">
             <div>
-                <img src="http://localhost:4000/img/{{this.image}}" alt="Bayern" class="image_part1">
+                <div class="image-container">
+                    <img src="http://localhost:4000/img/{{this.image}}" alt="Bayern" class="image_part1">
+                </div>
+                <div class="paragraph-container">
+                    <p>
+                        {{this.paragraph}}
+                    </p>
+                </div>
+                <div class="audio-container">
+                    <audio controls>
+                        <source src="http://localhost:4000/audio/{{this.audio}}" type="audio/mpeg">
+                    </audio>
+                </div>
+                {{#each this.question_list}}
+                <div class="question" id="question-{{this.number_question}}">
+                    <h4>
+                        Question {{this.number_question}}. {{this.question_content}}
+                    </h4>
+                    <div class="choice-container">
+                        <ul class="choice_list {{this.correct}} {{this.choice}}" >
+                            {{#each this.answer}}
+                            <li class="choice-item" id="{{this.number_question}}-{{this.L}}">
+                                <label>({{this.L}}){{this.content}}</label>
+                            </li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                </div>
+                {{/each}}
             </div>
-            <div class="paragraph-container">
-                <p>
-                    {{this.paragraph}}
-                </p>
-            </div>
-            <div>
-                <audio controls>
-                    <source src="http://localhost:4000/audio/{{this.audio}}" type="audio/mpeg">
-                </audio>
-            </div>
+        </div>
+        {{/each}}  
+    </div>
+    <div class="col-md-3 col-sm-3 control-container">
+        <div class="menu-container">
+            <div class="time-left"></div>
+        </div>
+        <div class="question-button-container">
+            {{#each data}}
             {{#each this.question_list}}
-            <h4>
-                Question {{this.number_question}}. {{this.question_content}}
-            </h4>
-            <div class="choice-container">
-                <ul class="choice_list {{this.correct}} {{this.choice}}" >
-                    {{#each this.answer}}
-                    <li class="choice-item" id="{{this.number_question}}-{{this.L}}">
-                        <label>({{this.L}}){{this.content}}</label>
-                    </li>
-                    {{/each}}
-                </ul>
+            <div class="question-button num-page-{{this.num_page}} question-{{this.number_question}}">
+                {{this.number_question}}
             </div>
+            {{/each}}
             {{/each}}
         </div>
     </div>
-    {{/each}}
 </div>
 <script>
     function convert_to_label(x){
@@ -43,10 +61,29 @@
         if (x == "3") return "C";
         if (x == "4") return "D";
     }
+
+    var buttons = document.getElementsByClassName("question-button")
+    for (var button of buttons){
+        button.onclick = function(e){
+            var num_page = e.toElement.classList[1].split("-")[2]
+            var datapage = document.getElementById("data-page-" + num_page)
+            var datapage_list = document.getElementsByClassName("question-container")
+            for (var item of datapage_list){
+                item.style.display = "none"
+            }
+            datapage.style.display = "block"
+        }
+    }
+    //Check answer and calculate user's score
+    var score = 0
+    var count_questions = document.getElementsByClassName("question").length
     for (var element of document.getElementsByClassName("choice_list")){
         var correct = element.classList[1]
         correct = convert_to_label(correct)
         var choice = element.classList[2]
+        if (!choice) continue
+        var number_question = element.querySelector(".choice-item").id.split("-")[0]
+        var div_question = document.querySelector(".question-button-container").querySelector(".question-"+number_question)
         for (var item of element.children){
             var id = item.id.split("-")[1]
             if (id == choice){
@@ -56,10 +93,45 @@
                 item.style.backgroundColor = "green"
             }
         }
+        if (choice == correct){
+            div_question.style.backgroundColor = "green"
+            score ++
+        }
+        else{
+            div_question.style.backgroundColor = "red"
+        }
     }
+    var time_element = document.querySelector(".time-left")
+    time_element.innerText = `Score : ${score} / ${count_questions}`
     for (var element of document.querySelectorAll("p")){
-        console.log(element)
         var text = element.innerText
         element.innerHTML = text
     }
+    var h = document.querySelector("h2")
+    var numPart = h.innerText.split(" ")[1]
+    //Remove redundant element
+    if (numPart > 1){
+        var imgs = document.getElementsByClassName("image-container")
+        for (var img of imgs){
+            img.style.display = "none"
+        }
+    }
+    if (numPart > 4){
+        var audios = document.getElementsByClassName("audio-container")
+        for (var audio of audios){
+            audio.style.display = "none"
+        }
+    }
+    if (numPart == 1 || numPart == 2 || numPart == 5){
+        var paragraphs = document.getElementsByClassName("paragraph-container")
+        for (var paragraph of paragraphs){
+            paragraph.style.display = "none"
+        }
+    }
+    function preventBack() {
+        window.history.forward()
+    }  
+    setTimeout("preventBack()", 0)
+    window.onunload = null
+    console.log(window)
 </script>

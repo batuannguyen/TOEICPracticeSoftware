@@ -4,7 +4,6 @@ const handlebars = require("express-handlebars")
 const path = require("path")
 const route = require('./resource/routes/index')
 const bodyParser = require("body-parser")
-const fs = require("fs")
 var app = express();
 app.use(bodyParser.urlencoded({"extended":true}))
 app.use(morgan("combined"))
