@@ -1,0 +1,102 @@
+<form action="http://localhost:4000/manage_question/modify/part-{{numPart}}-test-{{numTest}}" method="post" id="answer">
+    <div class="row">
+        <div class="col-md-8 col-sm-8 block-container">
+            <h2>
+                Part {{numPart}} - Test {{numTest}}
+            </h2>
+            {{#each data}}
+            <div class="question-container" id="data-page-{{this.num_page}}">
+                <div>
+                    <div class="image-container">
+                        <img src="http://localhost:4000/img/{{this.image}}" alt="Bayern" class="image_part1">
+                    </div>
+                    <div class="paragraph-container">
+                        <p>
+                            {{this.paragraph}}
+                        </p>
+                    </div>
+                    <div class="audio-container">
+                        <audio controls>
+                            <source src="http://localhost:4000/audio/{{this.audio}}" type="audio/mpeg">
+                        </audio>
+                    </div>
+                    {{#each this.question_list}}
+                    <div class="question" id="question-{{this.number_question}}">
+                        <h4>
+                            Question {{this.number_question}}.
+                            <input type="text" name="{{this.number_question}}-content" value="{{this.question_content}}" size="150">
+                        </h4>
+                        <div class="choice-container">
+                            <ul class="choice_list">
+                                {{#each this.answer}}
+                                <li class="choice-item">
+                                    <input type="radio" name="{{this.number_question}}-key" id="{{this.number_question}}-{{this.L}}" value="{{this.L}}">
+                                    <label for="{{this.number_question}}-{{this.L}}">({{this.L}})</label>
+                                    <input type="text" name="{{this.number_question}}-{{this.L}}" value="{{this.content}}" class="adjust" size="100">
+                                </li>
+                                {{/each}}
+                            </ul>
+                        </div>
+                    </div>
+                    {{/each}}
+                    
+                </div>
+            </div>
+            {{/each}}
+        </div>
+        <div class="col-md-3 col-sm-3 control-container">
+            <div class="menu-container">
+                <button type="submit" form="answer">Submit</button>
+            </div>
+            <div class="question-button-container">
+                {{#each data}}
+                {{#each this.question_list}}
+                <div class="question-button num-page-{{this.num_page}} question-{{this.number_question}}">
+                    {{this.number_question}}
+                </div>
+                {{/each}}
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</form>
+<script>
+    var h = document.querySelector("h2")
+    var numPart = h.innerText.split(" ")[1]
+    var buttons = document.getElementsByClassName("question-button")
+    for (var button of buttons){
+        button.onclick = function(e){
+            var num_page = e.toElement.classList[1].split("-")[2]
+            var datapage = document.getElementById("data-page-" + num_page)
+            var datapage_list = document.getElementsByClassName("question-container")
+            for (var item of datapage_list){
+                item.style.display = "none"
+            }
+            datapage.style.display = "block"
+        }
+    }
+    //Display paragraph
+    for (var element of document.querySelectorAll("p")){
+        var text = element.innerText
+        element.innerHTML = text
+    }
+    //Remove redundant element
+    if (numPart > 1){
+        var imgs = document.getElementsByClassName("image-container")
+        for (var img of imgs){
+            img.style.display = "none"
+        }
+    }
+    if (numPart > 4){
+        var audios = document.getElementsByClassName("audio-container")
+        for (var audio of audios){
+            audio.style.display = "none"
+        }
+    }
+    if (numPart == 1 || numPart == 2 || numPart == 5){
+        var paragraphs = document.getElementsByClassName("paragraph-container")
+        for (var paragraph of paragraphs){
+            paragraph.style.display = "none"
+        }
+    }
+</script>
