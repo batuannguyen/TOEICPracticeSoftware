@@ -12,6 +12,15 @@ for (var button of buttons){
         datapage.style.display = "block"
     }
 }
+
+function decode(correct){
+    switch (correct){
+        case "1": return "A";
+        case "2": return "B";
+        case "3": return "C";
+        case "4": return "D";
+    }
+}
 //Display paragraph
 for (var element of document.querySelectorAll("p")){
     var text = element.innerText
@@ -34,5 +43,15 @@ if (numPart == 1 || numPart == 2 || numPart == 5){
     var paragraphs = document.getElementsByClassName("paragraph-container")
     for (var paragraph of paragraphs){
         paragraph.style.display = "none"
+    }
+}
+
+
+for (var choice_list of document.getElementsByClassName("choice_list")){
+    var correct = decode(choice_list.classList[1])
+    for (var input of choice_list.querySelectorAll("input")){
+        if (input.type == "radio" && input.value == correct){
+            input.checked = true;
+        }
     }
 }

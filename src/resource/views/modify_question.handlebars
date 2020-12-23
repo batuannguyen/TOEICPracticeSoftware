@@ -1,4 +1,4 @@
-<form action="http://localhost:4000/manage_question/modify/part-{{numPart}}-test-{{numTest}}" method="post" id="answer">
+<form action="http://localhost:4000/manage_question/modify/part-{{numPart}}-test-{{numTest}}" method="post" id="answer" enctype="multipart/form-data">
     <div class="row">
         <div class="col-md-8 col-sm-8 block-container">
             <h2>
@@ -20,6 +20,20 @@
                             <source src="http://localhost:4000/audio/{{this.audio}}" type="audio/mpeg">
                         </audio>
                     </div>
+                    {{!-- <div class="file-update">
+                        <div class="update_image">
+                            <label for="{{this.num_page}}-img">Update image</label>
+                            <input name="{{this.num_page}}-img" id="{{this.num_page}}-img" type="file">
+                        </div>
+                        <div class="update_audio">
+                            <label for="{{this.num_page}}-audio">Update audio</label>
+                            <input name="{{this.num_page}}-audio" id="{{this.num_page}}-audio" type="file">
+                        </div>
+                        <div class="update_paragraph">
+                            <label for="{{this.num_page}}-paragraph">Update paragraph</label>
+                            <input name="{{this.num_page}}-paragraph" id="{{this.num_page}}-paragraph" type="file">
+                        </div>
+                    </div> --}}
                     {{#each this.question_list}}
                     <div class="question" id="question-{{this.number_question}}">
                         <h4>
@@ -27,7 +41,7 @@
                             <input type="text" name="{{this.number_question}}-content" value="{{this.question_content}}" size="150">
                         </h4>
                         <div class="choice-container">
-                            <ul class="choice_list">
+                            <ul class="choice_list {{this.correct}}">
                                 {{#each this.answer}}
                                 <li class="choice-item">
                                     <input type="radio" name="{{this.number_question}}-key" id="{{this.number_question}}-{{this.L}}" value="{{this.L}}">

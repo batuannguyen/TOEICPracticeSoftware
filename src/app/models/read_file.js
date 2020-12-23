@@ -1,6 +1,4 @@
-const queryData = require("../models/index")
 const fs = require("fs")
-const path = require("path")
 
 module.exports = async function read(path){
     var promise = new Promise((resolve,reject) =>{
