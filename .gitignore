@@ -3,5 +3,5 @@
 /node_modules/
 src/public
 
-
+src/resource/views/utils
 
