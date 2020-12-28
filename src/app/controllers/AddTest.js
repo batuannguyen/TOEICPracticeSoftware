@@ -2,8 +2,13 @@ const path = require("path")
 const add_data = require("../models/add_test")
 class AddQuestion{
     get(req, res){
-        var numPart = req.params.slug.split("-")[1]
-        res.render("add_test", {"numPart": numPart})
+        if (req.isAuthenticated() && req.user.user_id == 1){
+            var numPart = req.params.slug.split("-")[1]
+            res.render("add_test", {"numPart": numPart})
+        }
+        else{
+            res.sendStatus(404)
+        }
     }
     post(req, res){
         async function process(){
@@ -47,11 +52,16 @@ class AddQuestion{
             }
             await add_data(separate, numPart, req.files)
         }
-        try{
-            process();
+        if (req.user.user_id == 1){
+            try{
+                process();
+            }
+            catch(err){
+                console.warn(err)
+            }
         }
-        catch(err){
-            console.warn(err)
+        else{
+            res.sendStatus(404)
         }
     }
 }

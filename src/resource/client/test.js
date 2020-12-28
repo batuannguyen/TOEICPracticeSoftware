@@ -4,7 +4,7 @@ function TimeLeft(hours, minutes, seconds){
     this.minutes = minutes
     this.seconds = seconds
 }
-var time = new TimeLeft(0, 0, 10)
+var time = new TimeLeft(0, 0, 30)
 var time_element = document.querySelector(".time-left")
 time_element.innerText = display(time)
 function isOvertime(time){

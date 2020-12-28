@@ -1,6 +1,6 @@
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: black;
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: rgb(208, 33, 214);
 }
 
 * {
@@ -14,8 +14,7 @@ body {
 }
 
 /* Full-width input fields */
-input[type=text],
-input[type=password] {
+input[type=text], input[type=password] {
     width: 100%;
     padding: 15px;
     margin: 5px 0 22px 0;
@@ -24,8 +23,7 @@ input[type=password] {
     background: #f1f1f1;
 }
 
-input[type=text]:focus,
-input[type=password]:focus {
+input[type=text]:focus, input[type=password]:focus {
     background-color: #ddd;
     outline: none;
 }
@@ -52,12 +50,11 @@ hr {
     opacity: 1;
 }
 
-/* Add a blue text color to links */
+
 a {
     color: dodgerblue;
 }
 
-/* Set a grey background color and center the text of the "sign in" section */
 .signin {
     background-color: #aa4242;
     text-align: center;

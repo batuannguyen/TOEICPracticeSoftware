@@ -11,12 +11,18 @@ class ModifyQuestion{
             console.log(question_data)
             res.render("modify_question", {"data": question_data, "numPart": numPart, "numTest": numTest})
         }
-        try{
-            process()
+        if (req.isAuthenticated() && req.user.user_id == 1){
+            try{
+                process()
+            }
+            catch(err){
+                res.send("Server error")
+            }
         }
-        catch(err){
-            res.send("Server error")
+        else{
+            res.sendStatus(404)
         }
+        
     }
     post(req, res){
         async function process(){
@@ -28,11 +34,16 @@ class ModifyQuestion{
             await modify(req, numPart, numTest)
             res.render("modify_question", {"numPart": numPart, "numTest": numTest})
         }
-        try{
-            process()
+        if (req.isAuthenticated() && req.user.user_id == 1){
+            try{
+                process()
+            }
+            catch(err){
+                console.log(err)
+            }
         }
-        catch(err){
-            console.log(err)
+        else{
+            res.sendStatus(404)
         }
     }
 }

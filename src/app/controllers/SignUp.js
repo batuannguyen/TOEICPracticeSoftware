@@ -4,6 +4,8 @@ class Sign_Up{
     }
     post(req, res){
         //Process with post method
+        console.log(req.body)
+        res.redirect("http://localhost:4000/login")
     }
 }
 
