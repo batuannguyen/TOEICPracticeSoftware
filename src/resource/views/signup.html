@@ -76,10 +76,7 @@ a {
     var phone = document.forms["register"]["phone_number"].value;
     
     //check user email 
-    if(email.indexOf("@") != email.lastIndexOf("@") || 
-      email.lastIndexOf("@") == -1 ||
-      //!ValidateEmail(email)||
-      email.indexOf("@")==0){
+    if(!ValidateEmail(email)){
         
         alert("Invalid Email");
         return "Invalid Email";
@@ -110,8 +107,8 @@ a {
   }
 
   function ValidateEmail(inputText){
-    var mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-    if(inputText.value.match(mailformat)){
+    var mailformat = /^[a-zA-Z0-9]+(?:\.[a-zA-Z0-9-]+)*$/;
+    if(inputText.match(mailformat)){
       alert("Valid email address!");
       document.form1.text1.focus();
       return true;
