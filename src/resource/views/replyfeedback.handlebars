@@ -1,17 +1,32 @@
-<form action="http://localhost:4000/feedback" id="user_feedback" method="POST">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="http://localhost:4000/feedback" id="user_feedback" method="POST">
     <div class="body-wrapper col-sm-8 col-md-8">
-        <div class="label-wrapper">
-            <label for="feedback-content">Feedback</label>
+        {{#each data}}
+        <div class="content-wrapper-display">
+            <div class="label-wrapper">
+                <label for="feedback-content-{{this.feedback_id}}">Feedback</label>
+            </div>
+            <p id="feedback-content-{{this.feedback_id}}" class="content-wrapper-display">
+                {{this.feedback_content}}
+            </p>
+            <div class="label-wrapper">
+                <label for="reply-content-{{this.feedback_id}}">Reply</label>
+            </div>
+            <div class="reply-content">
+                <textarea name="reply-content-{{this.feedback_id}}" id="reply-content-{{this.feedback_id}}" cols="100" rows="10"></textarea>
+            </div>
         </div>
-        <p id="feedback-content">
-
-        </p>
-        <div class="label-wrapper">
-            <label for="reply-content">Reply</label>
-        </div>
-        <div class="reply-content">
-            <textarea name="reply-content" id="reply-content" cols="100" rows="10"></textarea>
-        </div>
+        {{/each}}
         <button type="submit" form="user_feedback">Submit</button>
     </div>
 </form>
+</body>
+<script src="http://localhost:4000/feedback.js"></script>
+</html>

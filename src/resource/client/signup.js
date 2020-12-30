@@ -4,53 +4,76 @@ function Register() {
     var password = document.forms["register"]["psw"].value;
     var password_repeat = document.forms["register"]["psw_repeat"].value;
     var phone = document.forms["register"]["phone_number"].value;
-    console.log(user_name)
+
     //check user email 
-    if (email.indexOf("@") != email.lastIndexOf("@") ||
-        email.lastIndexOf("@") == -1 ||
-        !ValidateEmail(email)) {
-        console.log("Invalid Email");
-        return "Invalid Email";
+    if (!ValidateEmail(email)) {
+
+        // alert("Invalid Email");
+        return false;
     }
 
     // check password
     if (password.indexOf(password_repeat) != 0 ||
         password.length != password_repeat.length) {
-        console.log("Password confirm not correct");
-        return "password confirm not correct";
+        // alert("Password confirm not correct");
+        return false;
     }
 
     if (password.length > 50) {
-        console.log("Password to long, please enter a shorter password, must contain less than 50 chars")
-        return "Password to long, please enter a shorter password, must contain less than 50 chars";
+        // alert("Password to long, please enter a shorter password, must contain less than 50 chars")
+        return false;
     }
 
+    if (!checkPhone(phone)){
+        // alert("Phone is invalid")
+        return false
+    }
     // register successfull 
-    var user = {
-        email: email,
-        user_name: user_name,
-        password: password,
-        phone: phone
-
-    };
-
-    return user
+    // alert("Signup successfully");
+    return true
 }
 
 function ValidateEmail(inputText) {
-    var mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-    if (inputText.value.match(mailformat)) {
+    var mailformat = /^[a-zA-Z0-9]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    if (inputText.match(mailformat)) {
         alert("Valid email address!");
         document.form1.text1.focus();
         return true;
     }
     else {
-        alert("You have entered an invalid email address!");
+        // alert("You have entered an invalid email address!");
         document.form1.text1.focus();
         return false;
     }
 }
-function test() {
-    var x = document.forms["register"]["email"];
-    console.log(x);
+
+function checkPhone(phone){
+    for (var i = 0; i < phone.length; i += 1){
+        if (phone[i] == '1' || phone[i] == '2' || phone[i] == '3' ||
+            phone[i] == '4' || phone[i] == '5' || phone[i] == '6' ||
+            phone[i] == '7' || phone[i] == '8' || phone[i] == '9' ||
+            phone[i] == '0'){
+                continue
+            }
+        else{
+            return false
+        }
+    }
+    return true
 }
+var html = document.querySelector("body")
+
+html.onkeyup = function(e){
+    console.log(e)
+    if (Register()){
+        // button.style.display = "block"
+        console.log("Valid")
+    }
+    else{
+        // button.style.display = "none"
+        console.log("Invalid")
+    }
+}
+
+
+console.log("Checking...")

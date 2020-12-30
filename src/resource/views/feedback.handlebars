@@ -1,11 +1,51 @@
-<form action="http://localhost:4000/feedback" id="user_feedback" method="POST">
-    <div class="body-wrapper">
-        <div class="label-wrapper">
-            <label for="feedback-content">Feedback</label>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+    <body>
+    <form action="http://localhost:4000/feedback" id="user_feedback" method="POST">
+        <div class="body-wrapper">
+            <div class="label-wrapper">
+                <label for="feedback-content">Feedback</label>
+            </div>
+            <div class="content-wrapper">
+                <textarea name="feedback" id="feedback-content" cols="100" rows="10" form="user_feedback"></textarea>
+            </div>
+            <button type="submit" form="user_feedback">Submit</button>
         </div>
-        <div class="content-wrapper">
-            <textarea name="feedback" id="feedback-content" cols="100" rows="10" form="user_feedback"></textarea>
+    </form>
+    <div class="feedback-list">
+        <h2>Feedback_list</h2>
+        {{#each data}}
+        <div class="feedback-item">
+            <legend>{{this.fullname}}</legend>
+            <div class="feedback-content">
+                <div class="label-wrapper">
+                    <label for="feedback-wrapper-{{this.feedback_id}}">Feedback</label>
+                </div>
+                <div class="content-wrapper-display" id="feedback-wrapper-{{this.feedback_id}}">
+                    <p>
+                        {{this.feedback_content}}
+                    </p>
+                </div>
+            </div>
+            <div class="response-content">
+                <div class="label-wrapper">
+                    <label for="response-wrapper-{{this.feedback_id}}">Response</label>
+                </div>
+                <div class="content-wrapper-display" id="response-wrapper-{{this.feedback_id}}">
+                    <p>
+                        {{this.response_content}}
+                    </p>
+                </div>
+            </div>
         </div>
-        <button type="submit" form="user_feedback">Submit</button>
+        {{/each}}
     </div>
-</form>
+
+</body>
+<script src="http://localhost:4000/feedback.js"></script>
+</html>
+

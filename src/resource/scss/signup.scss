@@ -1,41 +1,41 @@
 body {
-        font-family: Arial, Helvetica, sans-serif;
-        background-color: rgb(208, 33, 214);
-}
-
-* {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgb(208, 33, 214);
+  }
+  
+  * {
     box-sizing: border-box;
-}
-
-/* Add padding to containers */
-.container {
+  }
+  
+  /* Add padding to containers */
+  .container {
     padding: 16px;
     background-color: white;
-}
-
-/* Full-width input fields */
-input[type=text], input[type=password] {
+  }
+  
+  /* Full-width input fields */
+  input[type=text], input[type=password] {
     width: 100%;
     padding: 15px;
     margin: 5px 0 22px 0;
     display: inline-block;
     border: none;
     background: #f1f1f1;
-}
-
-input[type=text]:focus, input[type=password]:focus {
+  }
+  
+  input[type=text]:focus, input[type=password]:focus {
     background-color: #ddd;
     outline: none;
-}
-
-/* Overwrite default styles of hr */
-hr {
+  }
+  
+  /* Overwrite default styles of hr */
+  hr {
     border: 1px solid #f1f1f1;
     margin-bottom: 25px;
-}
-
-/* Set a style for the submit button */
-.registerbtn {
+  }
+  
+  /* Set a style for the submit button */
+  .registerbtn {
     background-color: #041f05;
     color: white;
     padding: 16px 20px;
@@ -44,18 +44,18 @@ hr {
     cursor: pointer;
     width: 100%;
     opacity: 0.9;
-}
-
-.registerbtn:hover {
+  }
+  
+  .registerbtn:hover {
     opacity: 1;
-}
-
-
-a {
+  }
+  
+  
+  a {
     color: dodgerblue;
-}
-
-.signin {
+  }
+  
+  .signin {
     background-color: #aa4242;
     text-align: center;
-}
+  }

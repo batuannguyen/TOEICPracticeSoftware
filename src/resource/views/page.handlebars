@@ -1,1 +1,52 @@
-<a href="http://localhost:4000/test/part-1-test-1">Test</a>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://fonts.google.com/css?family=Lato:300,400,700,900">
+  <link rel="stylesheet" href="http://localhost:4000/css/page.css">
+  <link rel="stylesheet" href="resources/css/styles.css" />
+  <link rel="stylesheet" href="http://localhost:4000/fonts/font-awesome-4.7.0/font-awesome-4.7.0/css/font-awesome.min.css">
+</head>
+<style>
+  
+</style>
+
+<body>
+  <header>
+    <!-- <a class="logo" href="#"><img src="./resources/img/logoTOEIC.png" alt="logo"></a> -->
+    <ul class="main-nav">
+      <li><a href="http://localhost:4000/page/info">Information</a></li>
+
+      <li><a href="#">Practice</a>
+        <ul class="menu">
+          {{#each data}}
+          <li><a href="http://localhost:4000/test/part-{{this.part}}-test-{{this.number_test}}">Part {{this.part}}-Test {{this.number_test}}</a></li>
+          {{/each}}
+        </ul>
+      </li>
+
+      <li><a href="http://localhost:4000/feedback">Feedback</a></li>
+      <li><a href="http://localhost:4000/reply">Reply</a></li>
+      <li><a href="#">Modify_Test</a>
+        <ul class="menu">
+          {{#each data}}
+          <li><a href="http://localhost:4000/manage_question/modify/part-{{this.part}}-test-{{this.number_test}}">Part {{this.part}}-Test {{this.number_test}}</a></li>
+          {{/each}}
+        </ul>
+      </li>
+      <li><a href="">Log out</a></li>
+
+    </ul>
+    <div class="clearfix"></div>
+    <div class="row">
+      <h1 class="heading-main-box">
+        We will study <br> English together <br> So join with us
+      </h1>
+      <a href="#" class="btn"></a>
+    </div>
+
+  </header>
+</body>
+</html>

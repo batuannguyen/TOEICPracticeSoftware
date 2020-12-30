@@ -1,4 +1,4 @@
-const handler = require("../../app/controllers/FeedBack")
+const handler = require("../../app/controllers/ReplyFeedBack")
 const express = require("express")
 
 var route = express.Router()
