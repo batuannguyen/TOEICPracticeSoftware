@@ -1,0 +1,125 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+html {
+    font-family: "Lato", sans-serif;
+    font-size: 20px;
+    color: #5a5a5a;
+    background-color: #ffffff;
+    text-rendering: optimizeLegibility;
+}
+
+/* ---------------- */
+/* ----------------- */
+/* -----HEADER--- */
+
+/* ------------- */
+/* DEFAULT SETUP */
+/* ------------- */
+.logo {
+    width: 350px;
+}
+
+header {
+    background-image: linear-gradient(45deg,
+            rgba(2, 33, 64, 0.8) 55%,
+            rgba(45, 95, 93, 0.85)),
+        url("./resources/img/background2.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    background-attachment: fixed;
+    /* view height */
+}
+
+.row {
+    margin: 0 auto;
+    max-width: 1400px;
+}
+
+.main-nav {
+    float: right;
+    list-style: none;
+    margin-right: 50px;
+    margin-top: 70px;
+
+}
+
+.clearfix::after {
+    content: " ";
+    display: table;
+    clear: both;
+}
+
+.main-nav li a {
+    text-decoration: none;
+    color: white;
+    font-size: 130%;
+    font-weight: 700;
+    padding: 3px;
+    display: block;
+}
+
+.main-nav li {
+    display: inline-table;
+    margin-right: 50px;
+    position: relative;
+}
+
+/* các hành động di chuột */
+.main-nav li a:hover,
+/* cá hành động như click chuột */
+.main-nav li a:active {
+    border-bottom: 2px solid #cccccc;
+    background: #f1f1f1;
+    color: #333;
+}
+
+.heading-main-box {
+    position: absolute;
+    top: 30%;
+    left: 30%;
+    transform: translate(-50%, -50%);
+}
+
+h1 {
+    text-transform: uppercase;
+    font-size: 150%;
+    font-weight: 400;
+    letter-spacing: 1px;
+    word-spacing: 5px;
+    color: white;
+    line-height: 150%;
+    text-align: center;
+    transform:translate(15%,200%) ;
+}
+
+.main-nav li>.menu:hover {
+    color: rgb(15, 15, 15);
+
+}
+
+.main-nav li>.menu {
+    display: none;
+    position: absolute;
+}
+
+.main-nav li:hover .menu {
+    display: inline-block;
+
+}
+.btn{
+    text-decoration: none;
+    color: white;
+    background-color: orange;
+    padding: 15px 30px;
+    margin: 0 5px;
+    width: 190px;
+    display: inline-block;
+    border-radius: 20px;
+    text-align:center;
+    transform: translate(450%,800%);
+}

@@ -36,13 +36,13 @@ function Register() {
 function ValidateEmail(inputText) {
     var mailformat = /^[a-zA-Z0-9]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     if (inputText.match(mailformat)) {
-        alert("Valid email address!");
-        document.form1.text1.focus();
+        // alert("Valid email address!");
+        // document.form1.text1.focus();
         return true;
     }
     else {
         // alert("You have entered an invalid email address!");
-        document.form1.text1.focus();
+        // document.form1.text1.focus();
         return false;
     }
 }
@@ -62,15 +62,15 @@ function checkPhone(phone){
     return true
 }
 var html = document.querySelector("body")
-
+var button = document.querySelector("button")
 html.onkeyup = function(e){
     console.log(e)
     if (Register()){
-        // button.style.display = "block"
+        button.style.display = "block"
         console.log("Valid")
     }
     else{
-        // button.style.display = "none"
+        button.style.display = "none"
         console.log("Invalid")
     }
 }
